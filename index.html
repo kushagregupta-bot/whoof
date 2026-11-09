@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whoof | Your pet's home away from home</title>
+<meta name="description" content="Traveling without your pet? Leave them at a loving home. Whoof is a pet-sitting platform for trusted, loving, home-based care, live across Delhi, Gurgaon and Noida.">
+<meta property="og:title" content="Whoof | Your pet's home away from home">
+<meta property="og:description" content="Traveling without your pet? Leave them at a loving home in Delhi NCR. A home, not a kennel.">
+<meta property="og:image" content="images/stock/hero-run-2000.webp">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#204654">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23204654'/%3E%3Cg fill='%23CAFFA6'%3E%3Cellipse cx='32' cy='41' rx='12' ry='10'/%3E%3Ccircle cx='17' cy='27' r='5.5'/%3E%3Ccircle cx='26' cy='18' r='5.5'/%3E%3Ccircle cx='38' cy='18' r='5.5'/%3E%3Ccircle cx='47' cy='27' r='5.5'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preload" as="image" href="images/stock/hero-run-2000.webp" media="(min-width: 761px)">
+<link rel="preload" as="image" href="images/stock/hero-run-1000.webp" media="(max-width: 760px)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── Palette (from the Spring Meadow / Teal Waters / Glacial Sky / Morning Mist board)
+     teal     deep sections, headings, body text, primary buttons
+     meadow   bright accent: highlights, Become a sitter, buttons on teal
+     sky      fresh background for How it works
+     grass    soft meadow tint for the FAQ
+     mist     default page background, cards, breathing room */
+  :root {
+    --teal: #204654;
+    --teal-2: #2B5866;
+    --grass: #E5F6D3;
+    --sky: #A9E0F1;
+    --sky-deep: #1D6880;
+    --meadow: #CAFFA6;
+    --meadow-deep: #B3F27F;
+    --mist: #F7F9E1;
+    --paper: #FCFDF2;
+    --ink: #204654;
+    --ink-soft: #3E6470;
+    --line: rgba(32,70,84,.18);
+
+    --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    --body: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    
+    --wrap: 1280px;
+    --frame: clamp(12px, 4vw, 64px);   /* grass showing either side of each panel */
+    --gap: clamp(72px, 16vh, 170px);    /* grass window between panels */
+    --gutter: clamp(16px, 5vw, 72px);
+    --ease: cubic-bezier(.22,.8,.24,1);
+    interpolate-size: allow-keywords;
+    /* Fine film grain, laid over photographs */
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; overflow-x: clip; }
+  body {
+    margin: 0; background: #5C9E4E; color: var(--ink);
+    font: 17px/1.6 var(--body);
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; margin: 0; line-height: .95; letter-spacing: -0.02em; font-variation-settings: "wdth" 80; }
+  p { margin: 0; }
+  [hidden] { display: none !important; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  :focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 3px; border-radius: 2px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .label { font: 600 13px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+
+  /* Buttons: squared-off, no lift. Only the colour responds to hover */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    font: 600 16px/1 var(--body); letter-spacing: .01em;
+    padding: 17px 26px; border-radius: 3px; border: 0; cursor: pointer; text-decoration: none;
+    transition: background-color .2s ease, color .2s ease;
+  }
+  .btn svg { width: 19px; height: 19px; flex: none; }
+  .btn-teal { background: var(--teal); color: var(--mist); }
+  .btn-teal:hover { background: var(--teal-2); }
+  .btn-meadow { background: var(--meadow); color: var(--teal); }
+  .btn-meadow:hover { background: var(--meadow-deep); }
+  .btn-mist { background: var(--mist); color: var(--teal); }
+  .btn-mist:hover { background: #fff; }
+  .btn-line { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
+  .btn-line:hover { background: rgba(255,255,255,.14); }
+  .btn[disabled] { opacity: .6; cursor: progress; }
+  .text-link { font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
+  .text-link:hover { text-decoration-color: var(--meadow-deep); }
+
+  /* Photographs: warm grade + grain, no frames */
+  .ph { position: relative; overflow: hidden; background: var(--grass); }
+  .ph img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.05) contrast(1.02); }
+  .ph::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: var(--grain); opacity: .12; mix-blend-mode: overlay;
+  }
+
+  /* ── Scroll reveals ──
+     Only when JS runs, so nothing is ever hidden without it. Each element plays once, when it
+     scrolls into view. data-reveal="" picks the style; --d staggers it. */
+  .js [data-reveal] {
+    opacity: 0; transform: translateY(26px);
+    transition: opacity .9s var(--ease) var(--d, 0s), transform .9s var(--ease) var(--d, 0s), clip-path 1.1s var(--ease) var(--d, 0s);
+  }
+  .js [data-reveal].in { opacity: 1; transform: none; }
+  /* panels rise off the grass */
+  .js [data-reveal="lift"] { transform: translateY(70px) scale(.96); transform-origin: 50% 0; transition-duration: 1.1s; }
+  /* headings slide up from behind a line */
+  .js [data-reveal="mask"] { opacity: 1; transform: translateY(.35em); clip-path: inset(0 -5% 100% -5%); }
+  .js [data-reveal="mask"].in { transform: none; clip-path: inset(-20% -5% -30% -5%); }
+  /* photos wipe open from the bottom and settle */
+  .js .ph[data-reveal] { opacity: 1; transform: none; clip-path: inset(100% 0 0 0); }
+  .js .ph[data-reveal].in { clip-path: inset(0 0 0 0); }
+  .js .ph[data-reveal] img { transform: scale(1.12); transition: transform 1.6s var(--ease) var(--d, 0s); }
+  .js .ph[data-reveal].in img { transform: none; }
+  /* small tilt that straightens */
+  .js [data-reveal="tilt"] { transform: translateY(36px) rotate(-5deg) scale(.94); }
+  .js .ph[data-reveal="tilt"] { opacity: 0; clip-path: none; }
+  .js [data-reveal="tilt"].in { opacity: 1; transform: none; }
+  /* drops in with a little bounce */
+  .js [data-reveal="drop"] { transform: translateY(-34px) rotate(2deg); transition-timing-function: cubic-bezier(.34,1.5,.6,1); }
+  /* halves slide in from either side */
+  .js [data-reveal="left"]  { transform: translateX(-80px); }
+  .js [data-reveal="right"] { transform: translateX(80px); }
+
+  /* How it works: rule draws across, photo slides in, number grows, text follows */
+  .js .step[data-reveal] { opacity: 1; transform: none; border-top-color: transparent; position: relative; }
+  .js .step[data-reveal]::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -1.5px; height: 1.5px; background: rgba(32,70,84,.22);
+    transform: scaleX(0); transform-origin: 0 50%; transition: transform 1.1s var(--ease);
+  }
+  .js .step[data-reveal] .ph { opacity: 0; transform: translateX(-60px); transition: opacity .9s var(--ease) .1s, transform .9s var(--ease) .1s; }
+  .js .step[data-reveal] .num { display: inline-block; opacity: 0; transform: translateY(45%) scale(.6); transform-origin: 50% 100%; transition: opacity .7s var(--ease) .3s, transform .9s cubic-bezier(.34,1.5,.6,1) .3s; }
+  .js .step[data-reveal] h3, .js .step[data-reveal] .txt p { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+  .js .step[data-reveal] h3 { transition-delay: .4s; }
+  .js .step[data-reveal] .txt p { transition-delay: .5s; }
+  .js .step.in::before { transform: scaleX(1); }
+  .js .step.in .ph, .js .step.in .num, .js .step.in h3, .js .step.in .txt p { opacity: 1; transform: none; }
+
+  /* Hero on arrival: words rise one by one, the rest follows, the photo eases back */
+  .js .hero h1 .w { display: inline-block; animation: word-up .9s var(--ease) both; animation-delay: calc(.15s + var(--i) * 55ms); }
+  @keyframes word-up { from { opacity: 0; transform: translateY(.55em); } to { opacity: 1; transform: none; } }
+  .js .hero .lede  { animation: fade-up .9s var(--ease) .75s both; }
+  .js .hero .ctas  { animation: fade-up .9s var(--ease) .9s both; }
+  .js .hero .small { animation: fade-up .9s var(--ease) 1.05s both; }
+  @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  .js .hero-img { animation: settle 2.2s var(--ease) both; }
+  @keyframes settle { from { transform: scale(1.12); } to { transform: none; } }
+  .hero-copy { will-change: transform, opacity; }
+
+  /* Quote: words fill in as you scroll through the card */
+  .js .quote .qw { opacity: .2; transition: opacity .35s ease; }
+  .js .quote .qw.on { opacity: 1; }
+
+  /* ── The field: one grass-and-sky photo fixed behind the whole page ── */
+  .backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: #5C9E4E; }
+  .backdrop img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%;
+    /* nudge the sky toward Glacial Sky / Teal Waters and the grass toward Spring Meadow */
+    filter: hue-rotate(-12deg) saturate(.82) brightness(1.04);
+    transform-origin: 50% 80%;
+  }
+  .backdrop picture { display: block; height: 100%; will-change: transform; }
+  .js .backdrop img { animation: breeze 28s ease-in-out infinite alternate; }
+  @keyframes breeze { from { transform: scale(1); } to { transform: scale(1.06) translateX(-1%); } }
+  .backdrop::after { content: ""; position: absolute; inset: 0; background: var(--grain); opacity: .1; mix-blend-mode: overlay; }
+
+  /* Every section is a panel resting on the field, with a strip of grass around it */
+  .pane { margin: 0 var(--frame) var(--gap); border-radius: 6px; overflow: clip; }
+
+  /* ── Nav ── */
+  .nav { position: fixed; inset: 0 0 auto; z-index: 50; color: var(--mist);
+    transition: background-color .35s ease, box-shadow .35s ease, color .35s ease, transform .45s var(--ease); }
+  .nav.tucked:not(:focus-within) { transform: translateY(-100%); }
+  .nav.scrolled { background: var(--mist); color: var(--teal); box-shadow: 0 1px 0 var(--line); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 72px; }
+  .logo { font: 800 26px/1 var(--display); font-variation-settings: "wdth" 85; letter-spacing: -0.03em; text-decoration: none; }
+  .nav ul { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
+  .nav ul a { text-decoration: none; font-weight: 500; font-size: 15px; }
+  .nav ul a:hover { text-decoration: underline; text-underline-offset: 5px; }
+  .nav .btn { padding: 12px 18px; font-size: 15px; }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative; isolation: isolate; margin-bottom: var(--gap); overflow: clip;
+    min-height: max(660px, 100svh);
+    display: flex; align-items: center; background: #1F4A2A; color: var(--mist);
+  }
+  .hero-img { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+  .hero-img img { width: 100%; height: 112%; object-fit: cover; object-position: 62% 45%; will-change: transform; }
+  .hero-copy { width: 100%; padding-top: 90px; padding-bottom: 60px; }
+  .hero h1 { font-size: clamp(48px, 5.4vw, 92px); max-width: 6.6em; }
+  .hero .lede { margin-top: 26px; font-size: 19px; max-width: 25em; color: rgba(247,249,225,.88); }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+  .hero .small { margin-top: 22px; font-size: 14px; color: rgba(247,249,225,.75); }
+  .hero .small strong { color: var(--meadow); font-weight: 600; }
+
+  /* ── Why Whoof ── */
+  .why { background: var(--teal); color: var(--mist); padding: clamp(64px, 8vw, 110px) 0 clamp(56px, 6vw, 84px); }
+  .why .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 clamp(16px, 2vw, 28px); }
+  .why .story { grid-column: 1 / span 6; }
+  .why h2 { font-size: clamp(44px, 5.6vw, 84px); margin: 18px 0 32px; }
+  .why h2 em { font-style: normal; color: var(--meadow); }
+  .why .label { color: var(--sky); }
+  .why .story p { max-width: 31em; color: rgba(247,249,225,.82); font-size: 18px; }
+  .why .story p + p { margin-top: 18px; }
+  .why .collage { grid-column: 8 / span 5; position: relative; margin-top: 30px; }
+  .why .c-main { aspect-ratio: 4 / 5; }
+  .why .c-main img { object-position: 58% 50%; }
+  .why .c-small { position: absolute; left: -18%; bottom: -16%; width: 50%; aspect-ratio: 3 / 4; border: 8px solid var(--teal); }
+  .on-field { margin-bottom: var(--gap); }
+  .quote { margin: 0; max-width: 880px; background: var(--mist); color: var(--teal); padding: clamp(30px, 4.5vw, 60px); }
+  .quote p { font: 700 clamp(30px, 3.6vw, 54px)/1.08 var(--display); font-variation-settings: "wdth" 85; letter-spacing: -0.015em; }
+  .quote footer { margin-top: 22px; font-size: 16px; color: var(--ink-soft); }
+  .quote .insight { margin-top: 24px; padding-top: 22px; border-top: 1.5px solid var(--line); font: 400 18px/1.55 var(--body); letter-spacing: 0; font-variation-settings: normal; color: var(--ink); max-width: 36em; }
+  .quote footer::before { content: ""; display: inline-block; width: 28px; height: 1.5px; background: currentColor; vertical-align: middle; margin: -3px 10px 0 0; }
+  .promises { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); margin-top: clamp(64px, 8vw, 110px); border-top: 1.5px solid rgba(247,249,225,.3); padding-top: 30px; }
+  .promise { display: grid; grid-template-columns: auto 1fr; gap: 0 20px; }
+  .promise .n { font: 800 64px/.8 var(--display); color: rgba(202,255,166,.4); }
+  .promise h3 { font-size: clamp(28px, 2.6vw, 36px); font-variation-settings: "wdth" 90; letter-spacing: -0.01em; }
+  .promise p { grid-column: 2; margin-top: 10px; color: rgba(247,249,225,.8); max-width: 26em; }
+
+  /* ── How it works ── */
+  .how { background: var(--sky); padding: clamp(56px, 7vw, 96px) 0; }
+  .how-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px 40px; flex-wrap: wrap; margin-bottom: clamp(24px, 3vw, 40px); }
+  .how-head h2 { font-size: clamp(48px, 6vw, 92px); }
+  .how-head p { font-size: 18px; color: var(--ink-soft); max-width: 22em; padding-bottom: .4em; }
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .step {
+    display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(16px, 2vw, 32px); align-items: center;
+    padding: clamp(20px, 2.4vw, 32px) 0; border-top: 1.5px solid rgba(32,70,84,.22);
+  }
+  .step:last-child { padding-bottom: 0; }
+  .step .ph { grid-column: 1 / span 4; aspect-ratio: 4 / 3; }
+  .step .ph.founders img { object-position: 50% 80%; }
+  .step .ph.tall { grid-column: 2 / span 3; aspect-ratio: 3 / 4; }
+  .step .ph.tall img { object-position: 50% 45%; }
+  .step .txt { grid-column: 6 / span 7; display: grid; grid-template-columns: auto 1fr; gap: 6px clamp(18px, 2vw, 32px); align-items: start; }
+  .step .num { grid-row: 1 / span 2; font: 800 clamp(72px, 7vw, 112px)/.78 var(--display); color: var(--paper); }
+  .step h3 { font-size: clamp(30px, 3vw, 44px); }
+  .step p { margin-top: 8px; font-size: 18px; color: var(--ink-soft); max-width: 28em; }
+
+  /* ── About ── */
+  .about { background: var(--mist); padding: clamp(56px, 7vw, 100px) 0; }
+  .about-top { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px clamp(32px, 6vw, 100px); align-items: start; }
+  .about-top h2 { grid-column: 1 / -1; }
+  .about h2 { font-size: clamp(56px, 8vw, 124px); }
+  .about-top p { color: var(--ink-soft); font-size: 18px; max-width: 30em; }
+  .about-top p + p { margin-top: 16px; }
+  .people { display: grid; grid-template-columns: 1fr 1fr 1.25fr; gap: clamp(14px, 2vw, 28px); margin-top: clamp(40px, 5vw, 64px); align-items: start; }
+  .person { margin: 0; }
+  .person .ph { aspect-ratio: 3 / 4; }
+  .person:nth-child(2) { margin-top: 70px; }
+  .person:nth-child(3) { margin-top: 24px; }
+  .person figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 14px; padding-top: 12px; border-top: 1.5px solid var(--teal); }
+  .person .name { font: 700 22px/1.1 var(--display); font-variation-settings: "wdth" 90; }
+  .person .role { font-size: 14px; color: var(--ink-soft); }
+  .person a { font-size: 14px; font-weight: 600; }
+  .note {
+    margin: 0; align-self: start;
+    background: var(--meadow); padding: 30px 30px 32px;
+    font: 700 clamp(24px, 2.2vw, 30px)/1.15 var(--display); font-variation-settings: "wdth" 88; letter-spacing: -0.01em; color: var(--teal);
+  }
+  .note .sig { display: block; margin-top: 16px; font: 500 15px var(--body); letter-spacing: 0; }
+
+  /* ── Get started: split CTA that opens into the form panel ── */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 2vw, 28px); position: relative; margin: 0 var(--frame) var(--gap); overflow-x: clip; }
+  .split > .half, .split > .panel { border-radius: 6px; overflow: clip; }
+  .split > .half { position: relative; display: grid; grid-template-rows: auto 1fr; min-height: 640px; }
+  .split .half .ph { height: clamp(260px, 28vw, 400px); }
+  .split .find .ph img { object-position: 50% 42%; }
+  .split .become .ph img { object-position: 50% 55%; }
+  .split .half-in { padding: clamp(36px, 4.5vw, 64px) var(--gutter) clamp(56px, 6vw, 88px); display: flex; flex-direction: column; align-items: flex-start; }
+  .split .find { background: var(--teal); color: var(--mist); }
+  .split .become { background: var(--meadow); color: var(--teal); }
+  .split h2 { font-size: clamp(38px, 4.2vw, 64px); }
+  .split p { margin-top: 18px; font-size: 18px; max-width: 26em; opacity: .9; }
+  .split .btn { margin-top: auto; }
+  .split .half-in p + .btn { margin-top: 34px; }
+  .split:not([data-state="closed"]) > .half { display: none; }
+
+  .panel { grid-column: 1 / -1; background: var(--teal); padding: clamp(96px, 9vw, 130px) var(--gutter) clamp(64px, 7vw, 100px); transition: background-color .4s ease; }
+  .split[data-state="become"] .panel { background: var(--meadow); }
+  .panel.enter .sheet { animation: rise .55s var(--ease) both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  .sheet { max-width: 760px; margin: 0 auto; background: var(--mist); position: relative; }
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1.5px solid var(--line); }
+  .tab {
+    border: 0; background: none; cursor: pointer; padding: 20px 16px;
+    font: 600 16px var(--body); color: var(--ink-soft);
+    box-shadow: inset 0 -3px 0 transparent; transition: color .2s ease, box-shadow .2s ease;
+  }
+  .tab[aria-selected="true"] { color: var(--teal); box-shadow: inset 0 -3px 0 var(--teal); }
+  .tab:focus-visible { outline-offset: -4px; }
+  .card { padding: clamp(26px, 4vw, 48px); }
+  .close {
+    position: absolute; top: -56px; right: 0;
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 0; background: none; cursor: pointer; padding: 8px 0;
+    font: 600 15px var(--body); color: var(--mist);
+  }
+  .split[data-state="become"] .close { color: var(--teal); }
+  .close svg { width: 14px; height: 14px; }
+  .close:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .reach h3 { font-size: clamp(34px, 4vw, 50px); }
+  .reach p { margin-top: 16px; color: var(--ink-soft); font-size: 18px; max-width: 30em; }
+  .reach-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .reach-num { margin-top: 18px; font-size: 15px; color: var(--ink-soft); }
+  .card .intro { color: var(--ink-soft); font-size: 18px; }
+  .field { margin-top: 18px; }
+  .field label { display: block; font: 600 14px var(--body); margin-bottom: 7px; }
+  .field .opt { font-weight: 400; color: var(--ink-soft); }
+  .field input, .field textarea {
+    width: 100%; font: 16px var(--body); color: var(--ink);
+    background: var(--paper); border: 0; border-bottom: 1.5px solid var(--teal); border-radius: 0;
+    padding: 12px 2px; color-scheme: light;
+  }
+  .field textarea { min-height: 90px; resize: vertical; }
+  .field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--sky-deep); box-shadow: 0 2px 0 var(--sky-deep); }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+  .form-actions { display: flex; justify-content: flex-end; margin-top: 30px; }
+  .form-error { margin-top: 16px; color: #8E2A1E; font-weight: 600; font-size: 15px; }
+  .form-error:empty { display: none; }
+  .thanks h3 { font-size: clamp(32px, 4vw, 44px); }
+  .thanks p { margin-top: 16px; color: var(--ink-soft); max-width: 28em; }
+  .thanks .btn { margin-top: 30px; }
+  .hp { position: absolute; left: -9999px; }
+
+  /* ── FAQ ── */
+  .faq { background: var(--grass); padding: clamp(56px, 7vw, 100px) 0; }
+  .faq .wrap { display: grid; grid-template-columns: .85fr 1.4fr; gap: clamp(36px, 6vw, 100px); align-items: start; }
+  .faq-side { position: sticky; top: 110px; }
+  .faq h2 { font-size: clamp(52px, 6.5vw, 96px); }
+  .faq-side p { margin-top: 22px; color: var(--ink-soft); max-width: 22em; }
+  .faq-side .ph { margin-top: 36px; aspect-ratio: 1; width: min(300px, 80%); }
+  .qa { border-top: 1.5px solid var(--teal); }
+  .qa:last-child { border-bottom: 1.5px solid var(--teal); }
+  .qa summary {
+    list-style: none; cursor: pointer; position: relative;
+    padding: 26px 56px 26px 0;
+    font: 700 clamp(21px, 2vw, 26px)/1.2 var(--display); font-variation-settings: "wdth" 90; letter-spacing: -0.01em;
+  }
+  .qa summary::-webkit-details-marker { display: none; }
+  /* plus that turns into a minus */
+  .qa summary::before, .qa summary::after {
+    content: ""; position: absolute; right: 8px; top: 50%; width: 18px; height: 2px; background: currentColor;
+    transition: transform .35s var(--ease);
+  }
+  .qa summary::after { transform: rotate(90deg); }
+  .qa[open] summary::after { transform: rotate(0deg); }
+  .qa::details-content { block-size: 0; overflow: hidden; transition: block-size .45s var(--ease), content-visibility .45s allow-discrete; }
+  .qa[open]::details-content { block-size: auto; }
+  .qa p { padding: 0 56px 28px 0; color: var(--ink-soft); font-size: 17px; max-width: 36em; }
+
+  /* ── Closing + footer ── */
+  /* Closing band: a long grass field, with the message on a Morning Mist panel */
+  .closing {
+    min-height: 0; display: flex; align-items: center;
+    padding: 0; margin-bottom: var(--gap);
+  }
+  .closing .wrap { width: 100%; }
+  .closing .txt { background: var(--mist); color: var(--teal); width: min(600px, 100%); padding: clamp(30px, 4vw, 52px); }
+  .closing h2 { font-size: clamp(44px, 5vw, 80px); }
+  .closing p { margin-top: 20px; font-size: 18px; color: var(--ink-soft); max-width: 26em; }
+  .closing .ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .closing .btn-line:hover { background: rgba(32,70,84,.06); }
+
+  .site { background: var(--teal); color: var(--mist); padding: 0 0 32px; margin-bottom: var(--frame) !important; }
+  .site .grid { border-top: 0 !important; }
+  .site .grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; padding-top: 56px; border-top: 1px solid rgba(250,246,238,.16); }
+  .site .logo { font-size: 44px; }
+  .site .tag { margin-top: 10px; opacity: .75; max-width: 22em; }
+  .site h4 { font: 600 13px var(--body); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 16px; color: var(--meadow); }
+  .site ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .site ul a { text-decoration: none; opacity: .9; }
+  .site ul a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+  .site .base { margin-top: 56px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 14px; opacity: .65; }
+  .site .base a { text-decoration: none; }
+
+  /* ── Responsive ── */
+  @media (max-width: 980px) {
+    .nav ul { display: none; }
+    .why .story { grid-column: 1 / -1; }
+    .why .collage { grid-column: 4 / span 9; margin-top: 70px; }
+    .why .c-small { left: -24%; }
+    .about-top { grid-template-columns: 1fr; align-items: start; }
+  }
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    .nav .wrap { height: 62px; }
+    .hero { min-height: 0; flex-direction: column; align-items: stretch; }
+    .hero-img { position: relative; order: 2; height: 58svh; min-height: 360px; z-index: 0; }
+    .hero-img img { height: 100%; object-position: 62% 55%; }
+    .hero-copy { padding-top: 84px; padding-bottom: 32px; }
+    .hero h1 { font-size: clamp(40px, 11.2vw, 58px); }
+    .hero .lede { font-size: 16px; margin-top: 18px; }
+    .hero .ctas .btn { flex: 1 1 140px; }
+    .why .collage { grid-column: 3 / -1; }
+    .why .c-small { left: -30%; width: 55%; }
+    .promises { grid-template-columns: 1fr; }
+    .promise .n { font-size: 48px; }
+    .step { grid-template-columns: 1fr; }
+    .step .ph, .step .txt { grid-column: 1; }
+    .step .ph.tall { grid-column: 1; width: 78%; }
+    .step .num { font-size: 64px; }
+    .step h3 { font-size: 28px; }
+    .step p { font-size: 16px; grid-column: 1 / -1; }
+    .step .num { grid-row: 1; }
+    .step .txt { align-items: end; }
+    .people { grid-template-columns: 1fr 1fr; }
+    .person:nth-child(2) { margin-top: 40px; }
+    .person:nth-child(3) { grid-column: 1 / -1; margin-top: 8px; }
+    .person:nth-child(3) .ph { aspect-ratio: 4 / 5; }
+    .split { grid-template-columns: 1fr; }
+    .split > .half { min-height: 0; }
+    .split .btn { margin-top: 30px; }
+    .faq .wrap { grid-template-columns: 1fr; }
+    .faq-side { position: static; }
+    .faq-side .ph { display: none; }
+    .qa summary { padding-right: 44px; }
+    .qa p { padding-right: 0; }
+    .closing { padding: 0; }
+    .closing .wrap { padding: 0; }
+    .closing .ctas .btn { flex: 1 1 auto; white-space: nowrap; padding: 16px 18px; }
+    .site .grid { grid-template-columns: 1fr 1fr; }
+    .site .grid > div:first-child { grid-column: 1 / -1; }
+    .row-2 { grid-template-columns: 1fr; }
+    .panel { padding: 90px 12px 56px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .backdrop img { animation: none; }
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .js [data-reveal], .js .ph[data-reveal], .js .ph[data-reveal] img,
+    .js .step[data-reveal] .ph, .js .step[data-reveal] .num, .js .step[data-reveal] h3, .js .step[data-reveal] .txt p { opacity: 1; transform: none; clip-path: none; }
+    .js .step[data-reveal]::before { transform: none; }
+    .js .quote .qw { opacity: 1; }
+    .nav.tucked { transform: none; }
+  }
+</style>
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+
+<div class="backdrop" aria-hidden="true">
+  <picture>
+    <source media="(max-width: 760px)" srcset="images/stock/grass-field-1000.webp">
+    <img src="images/stock/grass-field-2000.webp" alt="" width="2000" height="1250">
+  </picture>
+</div>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top">Whoof</a>
+    <ul>
+      <li><a href="#vision">Why Whoof</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#about">About us</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn-meadow" href="https://wa.me/919718449155" target="_blank" rel="noopener">Get in touch</a>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- HERO -->
+  <header class="hero">
+    <picture class="hero-img">
+      <source media="(max-width: 760px)" srcset="images/stock/hero-run-1000.webp">
+      <img src="images/stock/hero-run-2000.webp" alt="A fluffy white dog bounding across deep green grass with its tongue out" width="2000" height="1333" fetchpriority="high">
+    </picture>
+    <div class="wrap hero-copy">
+      <h1>Traveling without your pet? Leave them at a loving home.</h1>
+      <p class="lede">Whoof is a pet-sitting platform where you find trusted, loving sitters who look after your dog or cat in a real home while you travel. A home, not a kennel.</p>
+      <div class="ctas">
+        <a class="btn btn-meadow" href="#get-started" data-open="find">Find a sitter</a>
+        <a class="btn btn-line" href="https://forms.gle/hJ2EU6k7Pyuc1fk78" target="_blank" rel="noopener">Become a sitter</a>
+      </div>
+      <p class="small"><strong>Live across Delhi NCR:</strong> Delhi, Gurgaon and Noida. The meet &amp; greet is always free.</p>
+    </div>
+  </header>
+
+  <!-- WHY WHOOF -->
+  <section class="why pane" id="vision" data-reveal="lift">
+    <div class="wrap grid">
+      <div class="story">
+        <p class="label" data-reveal>Why Whoof</p>
+        <h2 data-reveal="mask">Finding someone you <em>trust</em> shouldn’t be the hardest part of a trip.</h2>
+        <p data-reveal style="--d:.1s">Pet parents often struggle to find someone they trust with their pet when they travel. They lean on friends, family and WhatsApp groups, or on kennels that can feel impersonal and a little scary.</p>
+        <p data-reveal style="--d:.2s">Whoof starts small: right now it’s just the two of us sitting pets ourselves. Over time we want to grow it into a trusted circle of sitters you can actually rely on.</p>
+      </div>
+      <div class="collage">
+        <div class="ph c-main" data-reveal data-speed="-0.06"><img src="images/park-goldens.jpg" alt="Two happy golden retrievers lying on the grass in a park" width="1500" height="1125" loading="lazy"></div>
+        <div class="ph c-small" data-reveal="tilt" data-speed="0.05" style="--d:.45s"><img src="images/cat-house.jpg" alt="A tabby cat peeking out of a cardboard house" width="231" height="308" loading="lazy"></div>
+      </div>
+      <div class="promises">
+        <div class="promise" data-reveal>
+          <span class="n" aria-hidden="true">01</span>
+          <h3>Trust first</h3>
+          <p>You meet us before you leave your pet. Come over, or hop on a call.</p>
+        </div>
+        <div class="promise" data-reveal style="--d:.15s">
+          <span class="n" aria-hidden="true">02</span>
+          <h3>Peace of mind</h3>
+          <p>Photo and video updates during the stay, and you can reach us any time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A real pet parent's words, sitting out on the field -->
+  <section class="on-field" aria-label="What pet parents tell us">
+    <div class="wrap">
+      <blockquote class="quote" data-reveal>
+        <p>“I plan my trips around my dog. If I can’t find someone I trust, I just cancel the plan.”</p>
+        <footer>One of the 100 pet parents we’ve interviewed</footer>
+        <p class="insight">Those conversations taught us that most pet parents don’t have a reliable, trusted, loving place for their pet when they travel, so many end up leaving them at a kennel.</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how pane" id="how" data-reveal="lift">
+    <div class="wrap">
+      <div class="how-head">
+        <h2 data-reveal="mask">How it works</h2>
+        <p data-reveal style="--d:.15s">No forms and no waiting lists. It starts with a conversation.</p>
+      </div>
+      <ol class="steps">
+        <li class="step" data-reveal>
+          <div class="ph"><img src="images/sofa-dogs.webp" alt="A smiling woman on a sofa with her three dogs curled up around her" width="960" height="1280" loading="lazy"></div>
+          <div class="txt">
+            <span class="num" aria-hidden="true">1</span>
+            <h3>Tell us about your pet</h3>
+            <p>Message us on WhatsApp or give us a call. Tell us when you need help and anything we should know.</p>
+          </div>
+        </li>
+        <li class="step" data-reveal>
+          <div class="ph founders"><img src="images/founders.jpg" alt="Kushagre and Ayeshaa, Whoof's founders, sitting side by side on a sofa" width="787" height="1400" loading="lazy"></div>
+          <div class="txt">
+            <span class="num" aria-hidden="true">2</span>
+            <h3>Meet us first</h3>
+            <p>Come over with your pet, or hop on a call. You see where they’ll stay, and we learn what makes them happy.</p>
+          </div>
+        </li>
+        <li class="step" data-reveal>
+          <div class="ph tall"><img src="images/street-walk.jpg" alt="A fluffy golden dog and a black dog greeting each other on leads during a walk" width="731" height="1300" loading="lazy"></div>
+          <div class="txt">
+            <span class="num" aria-hidden="true">3</span>
+            <h3>Travel worry-free</h3>
+            <p>Your pet stays in a real home. We send photo and video updates, and you can reach us any time during the sit.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about pane" id="about" data-reveal="lift">
+    <div class="wrap">
+      <div class="about-top">
+        <h2 data-reveal="mask">Who we are</h2>
+        <div class="about-intro" data-reveal style="--d:.1s">
+          <p>We’re Ayeshaa and Kushagre. We started Whoof because finding someone you trust with your pet is a lot harder than it should be.</p>
+          <p>For now it’s just the two of us, looking after every pet ourselves, in a home, with the same care we’d want for our own.</p>
+        </div>
+        <div class="note" data-reveal="drop" style="--d:.3s">
+          Every pet who stays with us gets their own bed, their usual routine, and lots of cuddles. Promise!
+          <span class="sig">Ayeshaa &amp; Kushagre</span>
+        </div>
+      </div>
+      <div class="people">
+        <figure class="person" data-reveal="tilt" style="--d:0.00s">
+          <div class="ph"><img src="images/ayeshaa.jpg" alt="Ayeshaa playing with a golden retriever rolling on its back" width="264" height="352" loading="lazy"></div>
+          <figcaption><span class="name">Ayeshaa Mohan</span><a href="https://www.linkedin.com/in/ayeshaa-mohan/" target="_blank" rel="noopener" aria-label="Ayeshaa Mohan on LinkedIn">LinkedIn</a></figcaption>
+        </figure>
+        <figure class="person" data-reveal="tilt" style="--d:0.14s">
+          <div class="ph"><img src="images/kushagre.jpg" alt="Kushagre sitting outdoors with a light-coloured dog" width="324" height="420" loading="lazy"></div>
+          <figcaption><span class="name">Kushagre Gupta</span><a href="https://www.linkedin.com/in/kushagre-gupta/" target="_blank" rel="noopener" aria-label="Kushagre Gupta on LinkedIn">LinkedIn</a></figcaption>
+        </figure>
+        <figure class="person" data-reveal="tilt" style="--d:0.28s">
+          <div class="ph"><img src="images/milo-sunglasses.jpg" alt="Milo the golden retriever in pink round sunglasses, sitting in the sun" width="975" height="1300" loading="lazy"></div>
+          <figcaption><span class="name">Milo :)</span><span class="role">The dog behind the inspiration</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET STARTED: split CTA, opens into the find / become panel -->
+  <section class="split" id="get-started" data-state="closed" aria-label="Get started">
+    <div class="half find" data-reveal="left">
+      <div class="ph"><img src="images/hug-black-dog.webp" alt="A woman holding her black and white dog in a big hug" width="960" height="1280" loading="lazy"></div>
+      <div class="half-in">
+        <h2>Your pet deserves a home away from home.</h2>
+        <p>Find a loving home for your pet while you’re away. Right now, that’s us.</p>
+        <button class="btn btn-meadow" type="button" data-open="find">Find a sitter</button>
+      </div>
+    </div>
+    <div class="half become" data-reveal="right" style="--d:.1s">
+      <div class="ph"><img src="images/stock/spaniel-dandelions.webp" alt="A black and white spaniel bounding through a field of dandelions" width="1100" height="1534" loading="lazy"></div>
+      <div class="half-in">
+        <h2>Become a vacation home for a pet.</h2>
+        <p>Love pets? We’re starting with just the two of us, and we’re looking for more sitters to join us as Whoof grows.</p>
+        <a class="btn btn-teal" href="https://forms.gle/hJ2EU6k7Pyuc1fk78" target="_blank" rel="noopener">Become a sitter</a>
+      </div>
+    </div>
+
+    <div class="panel" id="forms" hidden>
+      <div class="sheet">
+        <button class="close" type="button" data-close aria-label="Close and go back">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+          Close
+        </button>
+        <div class="tabs" role="tablist" aria-label="Choose one">
+          <button class="tab" type="button" role="tab" id="tab-find" aria-controls="find" data-tab="find">Find a sitter</button>
+          <button class="tab" type="button" role="tab" id="tab-become" aria-controls="become" data-tab="become">Become a sitter</button>
+        </div>
+
+        <div class="card reach" id="find" role="tabpanel" aria-labelledby="tab-find">
+          <h3>It’s just the two of us, for now.</h3>
+          <p>Right now it’s just the two of us pet sitting. Just message us on WhatsApp or give us a call in order to discuss both of your needs.</p>
+          <div class="reach-actions">
+            <a class="btn btn-teal" href="https://wa.me/919718449155" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+              Message on WhatsApp
+            </a>
+            <a class="btn btn-line" href="tel:+919718449155">Call us</a>
+          </div>
+          <p class="reach-num">+91 97184 49155</p>
+        </div>
+
+        <div class="card" id="become" role="tabpanel" aria-labelledby="tab-become" hidden>
+          <div class="reach">
+            <h3>Join us as a sitter.</h3>
+            <p>Fill in our quick interest form and we’ll get in touch. It takes about two minutes.</p>
+            <div class="reach-actions">
+              <a class="btn btn-teal" href="https://forms.gle/hJ2EU6k7Pyuc1fk78" target="_blank" rel="noopener">Open the sitter form</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq pane" id="faq" data-reveal="lift">
+    <div class="wrap">
+      <div class="faq-side">
+        <h2 data-reveal="mask">Good questions.</h2>
+        <p>Can’t find what you’re looking for? <a class="text-link" href="#contact">Message us</a> and we’ll happily answer.</p>
+        <div class="ph" data-reveal><img src="images/golden-and-cat.jpg" alt="A golden retriever resting its chin on a black cat" width="306" height="320" loading="lazy"></div>
+      </div>
+      <div>
+        <details class="qa" data-reveal style="--d:0.10s">
+          <summary>How much does it cost?</summary>
+          <p>It depends on how long your pet needs sitting, and we can discuss it after our first call. The meet &amp; greet is always free.</p>
+        </details>
+        <details class="qa" data-reveal style="--d:0.16s">
+          <summary>Which pets can stay with you?</summary>
+          <p>We welcome friendly dogs and cats, big or small. If your pet is reactive, very young, elderly or needs medication, tell us when we talk and we’ll work out whether we’re the right fit.</p>
+        </details>
+        <details class="qa" data-reveal style="--d:0.22s">
+          <summary>Do you sit cats too?</summary>
+          <p>Yes! We welcome both dogs and cats.</p>
+        </details>
+        <details class="qa" data-reveal style="--d:0.28s">
+          <summary>Do pets need to be vaccinated?</summary>
+          <p>Yes. We ask that pets are up to date on core vaccinations (including rabies) and on tick &amp; flea prevention, to keep every guest safe.</p>
+        </details>
+        <details class="qa" data-reveal style="--d:0.34s">
+          <summary>What happens in an emergency?</summary>
+          <p>Before the stay, we note your vet’s details and an emergency contact. If anything comes up, we call you straight away and take your pet to the nearest vet if needed.</p>
+        </details>
+        <details class="qa" data-reveal style="--d:0.40s">
+          <summary>What should I pack?</summary>
+          <p>Their usual food (sudden switches upset tummies), any medication, a leash, and something that smells like home: a favourite toy, blanket or bed.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- CLOSING + FOOTER / CONTACT -->
+<footer class="site-end" id="contact">
+  <section class="closing" aria-label="Get in touch">
+    <div class="wrap">
+      <div class="txt" data-reveal="lift">
+        <h2>Going somewhere soon? Say woof.</h2>
+        <p>Tell us about your pet and your dates, and we’ll take it from there. Or join us as a sitter.</p>
+        <div class="ctas">
+          <a class="btn btn-teal" href="https://wa.me/919718449155" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+            Chat on WhatsApp
+          </a>
+          <a class="btn btn-line" href="#get-started" data-open="find">Find a sitter</a>
+          <a class="btn btn-line" href="https://forms.gle/hJ2EU6k7Pyuc1fk78" target="_blank" rel="noopener">Become a sitter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="site pane" data-reveal="lift">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <a class="logo" href="#top">Whoof</a>
+          <p class="tag">A home, not a kennel. Home-based pet sitting in Delhi NCR.</p>
+        </div>
+        <div>
+          <h4>Reach us</h4>
+          <ul>
+            <li><a href="https://wa.me/919718449155" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="tel:+919718449155">+91 97184 49155</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#vision">Why Whoof</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#about">About us</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#get-started" data-open="find">Find a sitter</a></li>
+            <li><a href="https://forms.gle/hJ2EU6k7Pyuc1fk78" target="_blank" rel="noopener">Become a sitter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="base">
+        <span>© <span id="yr">2026</span> Whoof. Made with love (and pet hair).</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const scrollBehavior = () => (reduceMotion.matches ? "auto" : "smooth");
+
+  // ── Get started: open the find / become panel ──
+  const split = document.getElementById("get-started");
+  const panel = document.getElementById("forms");
+  const tabs = [...panel.querySelectorAll("[role=tab]")];
+
+  function selectTab(mode, focusTab) {
+    split.dataset.state = mode;
+    tabs.forEach((t) => {
+      const on = t.dataset.tab === mode;
+      t.setAttribute("aria-selected", on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      if (on && focusTab) t.focus();
+    });
+  }
+  function openPanel(mode) {
+    const wasHidden = panel.hidden;
+    panel.hidden = false;
+    selectTab(mode);
+    if (wasHidden) {
+      panel.classList.remove("enter"); void panel.offsetWidth; panel.classList.add("enter");
+    }
+    split.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+    setTimeout(() => {
+      const card = panel.querySelector(".card:not([hidden])");
+      const first = card && card.querySelector("input:not([type=hidden]):not(.hp), a.btn");
+      if (first) first.focus({ preventScroll: true });
+    }, reduceMotion.matches ? 0 : 450);
+  }
+  function closePanel() {
+    const mode = split.dataset.state;
+    panel.hidden = true;
+    split.dataset.state = "closed";
+    split.scrollIntoView({ behavior: "auto", block: "start" });
+    const back = split.querySelector(`.half [data-open="${mode}"]`);
+    if (back) back.focus({ preventScroll: true });
+  }
+  document.addEventListener("click", (e) => {
+    const opener = e.target.closest("[data-open]");
+    if (opener) { e.preventDefault(); openPanel(opener.dataset.open); return; }
+    if (e.target.closest("[data-close]")) { e.preventDefault(); closePanel(); }
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden) closePanel(); });
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => selectTab(t.dataset.tab));
+    t.addEventListener("keydown", (e) => {
+      if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) return;
+      e.preventDefault();
+      selectTab(tabs[(i + 1) % tabs.length].dataset.tab, true);
+    });
+  });
+
+  // ── Hero headline: wrap each word so they can rise in one after another ──
+  const h1 = document.querySelector(".hero h1");
+  h1.setAttribute("aria-label", h1.textContent);
+  h1.innerHTML = h1.textContent.split(" ").map((w, i) => `<span class="w" aria-hidden="true" style="--i:${i}">${w}</span>`).join(" ");
+
+  // ── Quote: wrap words so they can fill in as you scroll ──
+  const quoteP = document.querySelector(".quote > p:first-child");
+  const quoteCard = document.querySelector(".quote");
+  quoteP.setAttribute("aria-label", quoteP.textContent);
+  quoteP.innerHTML = quoteP.textContent.split(" ").map((w) => `<span class="qw" aria-hidden="true">${w}</span>`).join(" ");
+  const quoteWords = [...quoteP.querySelectorAll(".qw")];
+
+  // ── Scroll-linked motion: one rAF-throttled loop for everything ──
+  const nav = document.querySelector(".nav");
+  const heroImg = document.querySelector(".hero-img img");
+  const heroCopy = document.querySelector(".hero-copy");
+  const field = document.querySelector(".backdrop picture");
+  const drift = [...document.querySelectorAll("[data-speed]")];
+  const wide = matchMedia("(min-width: 761px)");
+  let ticking = false, lastY = scrollY;
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  function onScroll() {
+    ticking = false;
+    const y = scrollY, vh = innerHeight;
+    nav.classList.toggle("scrolled", y > 24);
+    // Nav slides away while you read downwards, and comes back the moment you scroll up
+    if (y > vh * 0.6 && y > lastY + 6) nav.classList.add("tucked");
+    else if (y < lastY - 6 || y < vh * 0.6) nav.classList.remove("tucked");
+    lastY = y;
+    if (reduceMotion.matches) { quoteWords.forEach((w) => w.classList.add("on")); return; }
+    // Hero: photo drifts slower than the page; headline lifts and fades as you leave
+    if (y < vh * 1.2) {
+      if (wide.matches) {
+        heroImg.style.transform = `translateY(${y * -0.12}px)`;
+        heroCopy.style.transform = `translateY(${y * -0.22}px)`;
+        heroCopy.style.opacity = (1 - clamp01(y / (vh * 0.75))).toFixed(3);
+      } else { heroCopy.style.transform = ""; heroCopy.style.opacity = ""; }
+    }
+    // The field: moves a touch slower than the page and slowly comes closer
+    const p = clamp01(y / Math.max(1, document.documentElement.scrollHeight - vh));
+    field.style.transform = `translateY(${(-p * 40).toFixed(1)}px) scale(${(1 + p * 0.1).toFixed(4)})`;
+    // Collage parallax
+    drift.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) return;
+      const off = (r.top + r.height / 2 - vh / 2) * parseFloat(el.dataset.speed);
+      el.style.translate = `0 ${off.toFixed(1)}px`;
+    });
+    // Quote: words light up as the card travels up the screen
+    const qr = quoteCard.getBoundingClientRect();
+    if (qr.top < vh && qr.bottom > 0) {
+      const prog = clamp01((vh * 0.9 - qr.top) / (vh * 0.55));
+      const n = Math.round(prog * quoteWords.length);
+      quoteWords.forEach((w, i) => w.classList.toggle("on", i < n));
+    }
+  }
+  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  addEventListener("resize", onScroll);
+  onScroll();
+
+  // ── Reveal on scroll: each element plays once as it comes into view ──
+  const revealables = document.querySelectorAll("[data-reveal]");
+  if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+    revealables.forEach((el) => el.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0 });
+    revealables.forEach((el) => io.observe(el));
+  }
+  // Backup: anything already on screen or scrolled past (e.g. after jumping via the nav) shows straight away
+  let pending = [...revealables];
+  function sweep() {
+    pending = pending.filter((el) => {
+      if (el.classList.contains("in")) return false;
+      const r = el.getBoundingClientRect();
+      if (r.height && r.top < innerHeight * 0.92) { el.classList.add("in"); return false; }
+      return true;
+    });
+  }
+  addEventListener("scroll", () => requestAnimationFrame(sweep), { passive: true });
+</script>
+</body>
+</html>
