@@ -451,6 +451,14 @@
     .row-2 { grid-template-columns: 1fr; }
     .panel { padding: 90px 12px 56px; }
   }
+  /* Phones: keep the field still and cheap to draw, so scrolling stays smooth on slower GPUs */
+  @media (max-width: 760px), (pointer: coarse) {
+    .backdrop { bottom: auto; height: 100vh; height: 100lvh; }
+    .js .backdrop img { animation: none; }
+    .backdrop picture { will-change: auto; }
+    .backdrop::after { display: none; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .js .backdrop img { animation: none; }
     html { scroll-behavior: auto; }
@@ -516,12 +524,12 @@
           </li>
           <li>
             <div class="q-art"><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4v9M33 10l-6 6M37 24h-9" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/></svg><img src="images/hero-puppy.jpg" alt="A black, white and tan puppy held in someone’s arms" width="787" height="1400" loading="lazy" style="object-position: 50% 38%"></div>
-            <h3>“Guilty at the gate.”</h3>
+            <h3>“Always thinking about my dog.”</h3>
             <p>“The first thing I do on a flight is scroll through pictures of my pet. I feel so guilty leaving them behind.”</p>
           </li>
           <li>
-            <div class="q-art"><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4v9M33 10l-6 6M37 24h-9" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/></svg><img src="images/milo.jpg" alt="Milo the golden retriever wearing sunglasses" width="1100" height="619" loading="lazy" style="object-position: 44% 40%"></div>
-            <h3>“Friends aren’t always free.”</h3>
+            <div class="q-art"><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4v9M33 10l-6 6M37 24h-9" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/></svg><img src="images/cat-sofa.jpg" alt="A tabby cat stretched out on its back on a green sofa" width="600" height="800" loading="lazy" style="object-position: 45% 40%"></div>
+            <h3>“I don’t trust kennels.”</h3>
             <p>“I’ve heard horror stories about kennels, so I leave my pet with family or friends. But you can’t always count on them.”</p>
           </li>
         </ul>
@@ -844,6 +852,8 @@
   const field = document.querySelector(".backdrop picture");
   const drift = [...document.querySelectorAll("[data-speed]")];
   const wide = matchMedia("(min-width: 761px)");
+  // Phones and touch screens skip the scroll-linked field zoom and photo parallax
+  const light = matchMedia("(max-width: 760px), (pointer: coarse)");
   let ticking = false, lastY = scrollY;
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
   function onScroll() {
@@ -854,7 +864,7 @@
     if (y > vh * 0.6 && y > lastY + 6) nav.classList.add("tucked");
     else if (y < lastY - 6 || y < vh * 0.6) nav.classList.remove("tucked");
     lastY = y;
-    if (reduceMotion.matches) return;
+    if (reduceMotion.matches || light.matches) return;
     // Hero: photo drifts slower than the page; headline lifts and fades as you leave
     if (y < vh * 1.2) {
       if (wide.matches) {
