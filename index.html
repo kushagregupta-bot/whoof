@@ -65,6 +65,10 @@
   :focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 3px; border-radius: 2px; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
+  /* Text that scans: a larger lead line, bold key phrases, chips for short lists */
+  .lead { font-size: clamp(20px, 1.75vw, 24px) !important; line-height: 1.4 !important; color: var(--ink); font-weight: 500; }
+  .chips { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font: 600 14px/1 var(--body); padding: 9px 13px; border-radius: 999px; background: rgba(32,70,84,.08); color: var(--teal); }
   .label { font: 600 13px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
 
   /* Buttons: squared-off, no lift. Only the colour responds to hover */
@@ -149,8 +153,6 @@
   .hero-copy { will-change: transform, opacity; }
 
   /* Quote: words fill in as you scroll through the card */
-  .js .quote .qw { opacity: .2; transition: opacity .35s ease; }
-  .js .quote .qw.on { opacity: 1; }
 
   /* ── The field: one grass-and-sky photo fixed behind the whole page ── */
   .backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: #5C9E4E; }
@@ -189,31 +191,43 @@
   .hero-img { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
   .hero-img img { width: 100%; height: 112%; object-fit: cover; object-position: 62% 45%; will-change: transform; }
   .hero-copy { width: 100%; padding-top: 90px; padding-bottom: 60px; }
-  .hero h1 { font-size: clamp(48px, 5.4vw, 92px); max-width: 6.6em; }
+  .hero h1 { font-size: clamp(46px, 5vw, 84px); max-width: 8.4em; }
   .hero .lede { margin-top: 26px; font-size: 19px; max-width: 25em; color: rgba(247,249,225,.88); }
   .hero .ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
   .hero .small { margin-top: 22px; font-size: 14px; color: rgba(247,249,225,.75); }
   .hero .small strong { color: var(--meadow); font-weight: 600; }
 
   /* ── Why Whoof ── */
-  .why { background: var(--teal); color: var(--mist); padding: clamp(64px, 8vw, 110px) 0 clamp(56px, 6vw, 84px); }
+  .why { background: var(--teal); color: var(--mist); padding: clamp(56px, 7vw, 96px) 0 clamp(56px, 6vw, 84px); }
+  /* Pet-parent quotes: blob photo, short title, a few centred lines */
+  .voices { grid-column: 1 / -1; margin-bottom: clamp(44px, 5vw, 72px); padding-bottom: clamp(28px, 3vw, 40px); border-bottom: 1.5px solid rgba(247,249,225,.2); }
+  .quotes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px clamp(20px, 3vw, 44px); text-align: center; }
+  /* Photo fills the blob; a bright meadow shape peeks out behind it */
+  .q-art { position: relative; width: clamp(170px, 15vw, 200px); aspect-ratio: 1; margin: 0 auto 22px; }
+  .q-art::before { content: ""; position: absolute; inset: -6px -12px 6px 10px; background: var(--meadow); border-radius: 58% 42% 55% 45% / 47% 56% 44% 53%; }
+  .q-art img { position: relative; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 4px solid var(--mist); }
+  .quotes li:nth-child(2) .q-art::before { inset: 8px 10px -8px -12px; border-radius: 44% 56% 48% 52% / 58% 42% 58% 42%; }
+  .quotes li:nth-child(3) .q-art::before { inset: -10px 6px 10px -10px; border-radius: 52% 48% 40% 60% / 45% 55% 45% 55%; }
+  .q-art .spark { position: absolute; z-index: 1; width: 38px; height: 38px; top: -18px; right: -22px; color: var(--meadow); }
+  .quotes li:nth-child(2) .spark { right: auto; left: -22px; transform: scaleX(-1); }
+  .quotes li:nth-child(3) .spark { top: auto; bottom: -14px; right: -24px; transform: rotate(90deg); }
+  .quotes h3 { font-size: clamp(26px, 2.3vw, 32px); font-variation-settings: "wdth" 88; letter-spacing: -0.015em; color: var(--mist); }
+  .quotes p { margin: 10px auto 0; max-width: 20em; font-size: 17px; line-height: 1.5; color: rgba(247,249,225,.9); }
+  .voices-note { margin: clamp(28px, 3vw, 40px) auto 0; text-align: center; font-size: 18px; color: rgba(247,249,225,.78); max-width: 34em; }
+  .voices-note strong { color: var(--mist); }
   .why .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 clamp(16px, 2vw, 28px); }
   .why .story { grid-column: 1 / span 6; }
   .why h2 { font-size: clamp(44px, 5.6vw, 84px); margin: 18px 0 32px; }
   .why h2 em { font-style: normal; color: var(--meadow); }
   .why .label { color: var(--sky); }
-  .why .story p { max-width: 31em; color: rgba(247,249,225,.82); font-size: 18px; }
+  .why .story p { max-width: 31em; color: rgba(247,249,225,.78); font-size: 18px; }
+  .why .story p.lead { color: var(--mist); }
+  .why strong { color: var(--mist); font-weight: 600; }
   .why .story p + p { margin-top: 18px; }
   .why .collage { grid-column: 8 / span 5; position: relative; margin-top: 30px; }
   .why .c-main { aspect-ratio: 4 / 5; }
   .why .c-main img { object-position: 58% 50%; }
   .why .c-small { position: absolute; left: -18%; bottom: -16%; width: 50%; aspect-ratio: 3 / 4; border: 8px solid var(--teal); }
-  .on-field { margin-bottom: var(--gap); }
-  .quote { margin: 0; max-width: 880px; background: var(--mist); color: var(--teal); padding: clamp(30px, 4.5vw, 60px); }
-  .quote p { font: 700 clamp(30px, 3.6vw, 54px)/1.08 var(--display); font-variation-settings: "wdth" 85; letter-spacing: -0.015em; }
-  .quote footer { margin-top: 22px; font-size: 16px; color: var(--ink-soft); }
-  .quote .insight { margin-top: 24px; padding-top: 22px; border-top: 1.5px solid var(--line); font: 400 18px/1.55 var(--body); letter-spacing: 0; font-variation-settings: normal; color: var(--ink); max-width: 36em; }
-  .quote footer::before { content: ""; display: inline-block; width: 28px; height: 1.5px; background: currentColor; vertical-align: middle; margin: -3px 10px 0 0; }
   .promises { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); margin-top: clamp(64px, 8vw, 110px); border-top: 1.5px solid rgba(247,249,225,.3); padding-top: 30px; }
   .promise { display: grid; grid-template-columns: auto 1fr; gap: 0 20px; }
   .promise .n { font: 800 64px/.8 var(--display); color: rgba(202,255,166,.4); }
@@ -221,7 +235,7 @@
   .promise p { grid-column: 2; margin-top: 10px; color: rgba(247,249,225,.8); max-width: 26em; }
 
   /* ── How it works ── */
-  .how { background: var(--sky); padding: clamp(56px, 7vw, 96px) 0; }
+  .how { background: var(--grass); padding: clamp(56px, 7vw, 96px) 0; }
   .how-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px 40px; flex-wrap: wrap; margin-bottom: clamp(24px, 3vw, 40px); }
   .how-head h2 { font-size: clamp(48px, 6vw, 92px); }
   .how-head p { font-size: 18px; color: var(--ink-soft); max-width: 22em; padding-bottom: .4em; }
@@ -236,9 +250,12 @@
   .step .ph.tall { grid-column: 2 / span 3; aspect-ratio: 3 / 4; }
   .step .ph.tall img { object-position: 50% 45%; }
   .step .txt { grid-column: 6 / span 7; display: grid; grid-template-columns: auto 1fr; gap: 6px clamp(18px, 2vw, 32px); align-items: start; }
-  .step .num { grid-row: 1 / span 2; font: 800 clamp(72px, 7vw, 112px)/.78 var(--display); color: var(--paper); }
+  .step .num { grid-row: 1 / span 2; font: 800 clamp(72px, 7vw, 112px)/.78 var(--display); color: var(--meadow-deep); -webkit-text-stroke: 1.5px var(--teal); }
   .step h3 { font-size: clamp(30px, 3vw, 44px); }
   .step p { margin-top: 8px; font-size: 18px; color: var(--ink-soft); max-width: 28em; }
+  .step p strong { color: var(--ink); font-weight: 600; }
+  .step .chips { grid-column: 2; margin-top: 10px; }
+  .step .chip { background: rgba(32,70,84,.09); }
 
   /* ── About ── */
   .about { background: var(--mist); padding: clamp(56px, 7vw, 100px) 0; }
@@ -246,7 +263,11 @@
   .about-top h2 { grid-column: 1 / -1; }
   .about h2 { font-size: clamp(56px, 8vw, 124px); }
   .about-top p { color: var(--ink-soft); font-size: 18px; max-width: 30em; }
-  .about-top p + p { margin-top: 16px; }
+  .about-top p + p, .about-top .chips + p { margin-top: 16px; }
+  .about-top p strong { color: var(--ink); font-weight: 600; }
+  .about-top p.lead { color: var(--ink); }
+  .about-top .chips { margin: 16px 0 4px; }
+  .about-top .about-close { margin-top: 24px; font: 700 clamp(24px, 2.2vw, 30px)/1.15 var(--display); font-variation-settings: "wdth" 88; letter-spacing: -0.01em; color: var(--teal); }
   .people { display: grid; grid-template-columns: 1fr 1fr 1.25fr; gap: clamp(14px, 2vw, 28px); margin-top: clamp(40px, 5vw, 64px); align-items: start; }
   .person { margin: 0; }
   .person .ph { aspect-ratio: 3 / 4; }
@@ -276,7 +297,7 @@
   .split h2 { font-size: clamp(38px, 4.2vw, 64px); }
   .split p { margin-top: 18px; font-size: 18px; max-width: 26em; opacity: .9; }
   .split .btn { margin-top: auto; }
-  .split .half-in p + .btn { margin-top: 34px; }
+  .split .half-in p { margin-bottom: 34px; }
   .split:not([data-state="closed"]) > .half { display: none; }
 
   .panel { grid-column: 1 / -1; background: var(--teal); padding: clamp(96px, 9vw, 130px) var(--gutter) clamp(64px, 7vw, 100px); transition: background-color .4s ease; }
@@ -398,6 +419,9 @@
     .why .collage { grid-column: 3 / -1; }
     .why .c-small { left: -30%; width: 55%; }
     .promises { grid-template-columns: 1fr; }
+    .quotes { grid-template-columns: 1fr; gap: 40px; }
+    .q-art { width: 168px; }
+    .step .chips { grid-column: 1 / -1; }
     .promise .n { font-size: 48px; }
     .step { grid-template-columns: 1fr; }
     .step .ph, .step .txt { grid-column: 1; }
@@ -434,7 +458,6 @@
     .js [data-reveal], .js .ph[data-reveal], .js .ph[data-reveal] img,
     .js .step[data-reveal] .ph, .js .step[data-reveal] .num, .js .step[data-reveal] h3, .js .step[data-reveal] .txt p { opacity: 1; transform: none; clip-path: none; }
     .js .step[data-reveal]::before { transform: none; }
-    .js .quote .qw { opacity: 1; }
     .nav.tucked { transform: none; }
   }
 </style>
@@ -455,8 +478,8 @@
     <ul>
       <li><a href="#vision">Why Whoof</a></li>
       <li><a href="#how">How it works</a></li>
-      <li><a href="#about">About us</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li><a href="#about">About us</a></li>
     </ul>
     <a class="btn btn-meadow" href="https://wa.me/919718449155" target="_blank" rel="noopener">Get in touch</a>
   </div>
@@ -471,8 +494,8 @@
       <img src="images/stock/hero-run-2000.webp" alt="A fluffy white dog bounding across deep green grass with its tongue out" width="2000" height="1333" fetchpriority="high">
     </picture>
     <div class="wrap hero-copy">
-      <h1>Traveling without your pet? Leave them at a loving home.</h1>
-      <p class="lede">Whoof is a pet-sitting platform where you find trusted, loving sitters who look after your dog or cat in a real home while you travel. A home, not a kennel.</p>
+      <h1>Travelling without your pet? Leave them at a loving home while you’re away.</h1>
+      <p class="lede">Whoof is a pet-sitting platform where you find trusted, vetted, animal-loving sitters who can look after your dog or cat at their home, whether it’s for a few hours or a few nights.</p>
       <div class="ctas">
         <a class="btn btn-meadow" href="#get-started" data-open="find">Find a sitter</a>
         <a class="btn btn-line" href="https://forms.gle/hJ2EU6k7Pyuc1fk78" target="_blank" rel="noopener">Become a sitter</a>
@@ -484,11 +507,32 @@
   <!-- WHY WHOOF -->
   <section class="why pane" id="vision" data-reveal="lift">
     <div class="wrap grid">
+      <div class="voices" aria-label="What pet parents told us">
+        <ul class="quotes">
+          <li>
+            <div class="q-art"><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4v9M33 10l-6 6M37 24h-9" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/></svg><img src="images/golden-flower.jpg" alt="A golden retriever with a pink flower on its head" width="237" height="315" loading="lazy" style="object-position: 50% 40%"></div>
+            <h3>“I just cancel the trip.”</h3>
+            <p>“I plan my trips around my pet. If I can’t find someone I trust, I just cancel the plan.”</p>
+          </li>
+          <li>
+            <div class="q-art"><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4v9M33 10l-6 6M37 24h-9" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/></svg><img src="images/hero-puppy.jpg" alt="A black, white and tan puppy held in someone’s arms" width="787" height="1400" loading="lazy" style="object-position: 50% 38%"></div>
+            <h3>“Guilty at the gate.”</h3>
+            <p>“The first thing I do on a flight is scroll through pictures of my pet. I feel so guilty leaving them behind.”</p>
+          </li>
+          <li>
+            <div class="q-art"><svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4v9M33 10l-6 6M37 24h-9" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/></svg><img src="images/milo.jpg" alt="Milo the golden retriever wearing sunglasses" width="1100" height="619" loading="lazy" style="object-position: 44% 40%"></div>
+            <h3>“Friends aren’t always free.”</h3>
+            <p>“I’ve heard horror stories about kennels, so I leave my pet with family or friends. But you can’t always count on them.”</p>
+          </li>
+        </ul>
+        <p class="voices-note">These are a few things <strong>100 pet parents</strong> told us. Turns out, a lot of them face the same problem, <strong>and it shouldn’t be this hard to solve.</strong></p>
+      </div>
       <div class="story">
         <p class="label" data-reveal>Why Whoof</p>
-        <h2 data-reveal="mask">Finding someone you <em>trust</em> shouldn’t be the hardest part of a trip.</h2>
-        <p data-reveal style="--d:.1s">Pet parents often struggle to find someone they trust with their pet when they travel. They lean on friends, family and WhatsApp groups, or on kennels that can feel impersonal and a little scary.</p>
-        <p data-reveal style="--d:.2s">Whoof starts small: right now it’s just the two of us sitting pets ourselves. Over time we want to grow it into a trusted circle of sitters you can actually rely on.</p>
+        <h2 data-reveal="mask">You shouldn’t feel <em>anxious</em> about your pet when you travel.</h2>
+        <p class="lead" data-reveal style="--d:.1s">We’re pet parents too. We know the guilt of leaving them behind, and the worry of leaving them with someone you barely know.</p>
+        <p data-reveal style="--d:.2s">That’s why we’re building Whoof: a selective, personal pet-sitting platform where you <strong>get to know your sitter before</strong> you leave your pet in their care.</p>
+        <p data-reveal style="--d:.3s">For now, <strong>all the sitting is done by us, the founders</strong>. Whether it’s <strong>a few hours during the day or a few nights away</strong>, we keep it personal and get to know every pet and parent ourselves.</p>
       </div>
       <div class="collage">
         <div class="ph c-main" data-reveal data-speed="-0.06"><img src="images/park-goldens.jpg" alt="Two happy golden retrievers lying on the grass in a park" width="1500" height="1125" loading="lazy"></div>
@@ -497,26 +541,15 @@
       <div class="promises">
         <div class="promise" data-reveal>
           <span class="n" aria-hidden="true">01</span>
-          <h3>Trust first</h3>
-          <p>You meet us before you leave your pet. Come over, or hop on a call.</p>
+          <h3>Get to know us first</h3>
+          <p>You don’t have to leave your pet with someone you’ve never met. Come over, meet us, let your pet get familiar with us, or just hop on a call before deciding.</p>
         </div>
         <div class="promise" data-reveal style="--d:.15s">
           <span class="n" aria-hidden="true">02</span>
-          <h3>Peace of mind</h3>
-          <p>Photo and video updates during the stay, and you can reach us any time.</p>
+          <h3>Stay in the loop</h3>
+          <p>Expect regular photos and videos of meals, playtime and naps, plus the odd random one just because. You’ll never have to ask, and we’re always a call or message away.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- A real pet parent's words, sitting out on the field -->
-  <section class="on-field" aria-label="What pet parents tell us">
-    <div class="wrap">
-      <blockquote class="quote" data-reveal>
-        <p>“I plan my trips around my dog. If I can’t find someone I trust, I just cancel the plan.”</p>
-        <footer>One of the 100 pet parents we’ve interviewed</footer>
-        <p class="insight">Those conversations taught us that most pet parents don’t have a reliable, trusted, loving place for their pet when they travel, so many end up leaving them at a kennel.</p>
-      </blockquote>
     </div>
   </section>
 
@@ -525,65 +558,35 @@
     <div class="wrap">
       <div class="how-head">
         <h2 data-reveal="mask">How it works</h2>
-        <p data-reveal style="--d:.15s">No forms and no waiting lists. It starts with a conversation.</p>
+        <p data-reveal style="--d:.15s">No forms, no complicated processes. It starts with a conversation.</p>
       </div>
       <ol class="steps">
         <li class="step" data-reveal>
           <div class="ph"><img src="images/sofa-dogs.webp" alt="A smiling woman on a sofa with her three dogs curled up around her" width="960" height="1280" loading="lazy"></div>
           <div class="txt">
-            <span class="num" aria-hidden="true">1</span>
+            <span class="num" aria-hidden="true">01</span>
             <h3>Tell us about your pet</h3>
-            <p>Message us on WhatsApp or give us a call. Tell us when you need help and anything we should know.</p>
+            <p><strong>Drop us a WhatsApp or give us a call.</strong> Tell us about your pet and when you need a sitter, <strong>for a few hours or a few nights</strong>, plus the little things that help us get to know them:</p>
+            <ul class="chips"><li class="chip">Routine</li><li class="chip">Favourite things</li><li class="chip">Vet details</li><li class="chip">Quirks</li></ul>
           </div>
         </li>
         <li class="step" data-reveal>
           <div class="ph founders"><img src="images/founders.jpg" alt="Kushagre and Ayeshaa, Whoof's founders, sitting side by side on a sofa" width="787" height="1400" loading="lazy"></div>
           <div class="txt">
-            <span class="num" aria-hidden="true">2</span>
-            <h3>Meet us first</h3>
-            <p>Come over with your pet, or hop on a call. You see where they’ll stay, and we learn what makes them happy.</p>
+            <span class="num" aria-hidden="true">02</span>
+            <h3>Let’s get acquainted</h3>
+            <p><strong>Before the stay, we’ll meet.</strong> Come over with your pet, see where they’ll be staying, and we’ll go over everything they need.</p>
           </div>
         </li>
         <li class="step" data-reveal>
           <div class="ph tall"><img src="images/street-walk.jpg" alt="A fluffy golden dog and a black dog greeting each other on leads during a walk" width="731" height="1300" loading="lazy"></div>
           <div class="txt">
-            <span class="num" aria-hidden="true">3</span>
-            <h3>Travel worry-free</h3>
-            <p>Your pet stays in a real home. We send photo and video updates, and you can reach us any time during the sit.</p>
+            <span class="num" aria-hidden="true">03</span>
+            <h3>Stay in the loop</h3>
+            <p><strong>Photos and videos throughout the stay.</strong> You’re always in the loop, and you can reach us whenever you need.</p>
           </div>
         </li>
       </ol>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about pane" id="about" data-reveal="lift">
-    <div class="wrap">
-      <div class="about-top">
-        <h2 data-reveal="mask">Who we are</h2>
-        <div class="about-intro" data-reveal style="--d:.1s">
-          <p>We’re Ayeshaa and Kushagre. We started Whoof because finding someone you trust with your pet is a lot harder than it should be.</p>
-          <p>For now it’s just the two of us, looking after every pet ourselves, in a home, with the same care we’d want for our own.</p>
-        </div>
-        <div class="note" data-reveal="drop" style="--d:.3s">
-          Every pet who stays with us gets their own bed, their usual routine, and lots of cuddles. Promise!
-          <span class="sig">Ayeshaa &amp; Kushagre</span>
-        </div>
-      </div>
-      <div class="people">
-        <figure class="person" data-reveal="tilt" style="--d:0.00s">
-          <div class="ph"><img src="images/ayeshaa.jpg" alt="Ayeshaa playing with a golden retriever rolling on its back" width="264" height="352" loading="lazy"></div>
-          <figcaption><span class="name">Ayeshaa Mohan</span><a href="https://www.linkedin.com/in/ayeshaa-mohan/" target="_blank" rel="noopener" aria-label="Ayeshaa Mohan on LinkedIn">LinkedIn</a></figcaption>
-        </figure>
-        <figure class="person" data-reveal="tilt" style="--d:0.14s">
-          <div class="ph"><img src="images/kushagre.jpg" alt="Kushagre sitting outdoors with a light-coloured dog" width="324" height="420" loading="lazy"></div>
-          <figcaption><span class="name">Kushagre Gupta</span><a href="https://www.linkedin.com/in/kushagre-gupta/" target="_blank" rel="noopener" aria-label="Kushagre Gupta on LinkedIn">LinkedIn</a></figcaption>
-        </figure>
-        <figure class="person" data-reveal="tilt" style="--d:0.28s">
-          <div class="ph"><img src="images/milo-sunglasses.jpg" alt="Milo the golden retriever in pink round sunglasses, sitting in the sun" width="975" height="1300" loading="lazy"></div>
-          <figcaption><span class="name">Milo :)</span><span class="role">The dog behind the inspiration</span></figcaption>
-        </figure>
-      </div>
     </div>
   </section>
 
@@ -592,16 +595,16 @@
     <div class="half find" data-reveal="left">
       <div class="ph"><img src="images/hug-black-dog.webp" alt="A woman holding her black and white dog in a big hug" width="960" height="1280" loading="lazy"></div>
       <div class="half-in">
-        <h2>Your pet deserves a home away from home.</h2>
-        <p>Find a loving home for your pet while you’re away. Right now, that’s us.</p>
+        <h2>Your pet deserves a vacation home.</h2>
+        <p>Find a loving home for your pet while you’re away. Right now, that’s us!</p>
         <button class="btn btn-meadow" type="button" data-open="find">Find a sitter</button>
       </div>
     </div>
     <div class="half become" data-reveal="right" style="--d:.1s">
       <div class="ph"><img src="images/stock/spaniel-dandelions.webp" alt="A black and white spaniel bounding through a field of dandelions" width="1100" height="1534" loading="lazy"></div>
       <div class="half-in">
-        <h2>Become a vacation home for a pet.</h2>
-        <p>Love pets? We’re starting with just the two of us, and we’re looking for more sitters to join us as Whoof grows.</p>
+        <h2>Your home can become a pet’s vacation home.</h2>
+        <p>Love pets? We’re looking for more pet-sitters to slowly grow our network. Become a part of it!</p>
         <a class="btn btn-teal" href="https://forms.gle/hJ2EU6k7Pyuc1fk78" target="_blank" rel="noopener">Become a sitter</a>
       </div>
     </div>
@@ -656,6 +659,10 @@
           <summary>How much does it cost?</summary>
           <p>It depends on how long your pet needs sitting, and we can discuss it after our first call. The meet &amp; greet is always free.</p>
         </details>
+        <details class="qa" data-reveal style="--d:0.13s">
+          <summary>Can I leave my pet just for the day?</summary>
+          <p>Of course. Whether it’s a few hours while you’re at work or out for the day, or a few nights away, we’re happy to help.</p>
+        </details>
         <details class="qa" data-reveal style="--d:0.16s">
           <summary>Which pets can stay with you?</summary>
           <p>We welcome friendly dogs and cats, big or small. If your pet is reactive, very young, elderly or needs medication, tell us when we talk and we’ll work out whether we’re the right fit.</p>
@@ -680,6 +687,40 @@
     </div>
   </section>
 
+  <!-- ABOUT -->
+  <section class="about pane" id="about" data-reveal="lift">
+    <div class="wrap">
+      <div class="about-top">
+        <h2 data-reveal="mask">Who we are</h2>
+        <div class="about-intro" data-reveal style="--d:.1s">
+          <p class="lead">Hey! We’re <strong>Ayeshaa and Kushagre</strong>, two college students, pet lovers and the people behind Whoof.</p>
+          <ul class="chips"><li class="chip">Ayeshaa · Gurgaon</li><li class="chip">Kushagre · South Delhi</li></ul>
+          <p>We’re the kind of people who always stop to say hi to every dog and cat we pass. Over time, we’ve seen how hard it is for pet parents to find someone they genuinely trust, and <strong>kennels never felt like the right answer</strong>. Pets shouldn’t have to leave their familiar routines just because their humans are away.</p>
+          <p>After hearing so many pet parents share the same struggle, we decided to do something about it. For now, <strong>it’s just the two of us doing all the sitting</strong>: your pet stays in a home, with people who love having them around.</p>
+          <p class="about-close">We’re so excited to meet you (and your pet, of course)!</p>
+        </div>
+        <div class="note" data-reveal="drop" style="--d:.3s">
+          Every pet who stays with us gets their own bed, their usual routine, and lots of cuddles. Promise!
+          <span class="sig">Ayeshaa &amp; Kushagre</span>
+        </div>
+      </div>
+      <div class="people">
+        <figure class="person" data-reveal="tilt" style="--d:0.00s">
+          <div class="ph"><img src="images/ayeshaa.jpg" alt="Ayeshaa playing with a golden retriever rolling on its back" width="264" height="352" loading="lazy"></div>
+          <figcaption><span class="name">Ayeshaa Mohan</span><a href="https://www.linkedin.com/in/ayeshaa-mohan/" target="_blank" rel="noopener" aria-label="Ayeshaa Mohan on LinkedIn">LinkedIn</a></figcaption>
+        </figure>
+        <figure class="person" data-reveal="tilt" style="--d:0.14s">
+          <div class="ph"><img src="images/kushagre.jpg" alt="Kushagre sitting outdoors with a light-coloured dog" width="324" height="420" loading="lazy"></div>
+          <figcaption><span class="name">Kushagre Gupta</span><a href="https://www.linkedin.com/in/kushagre-gupta/" target="_blank" rel="noopener" aria-label="Kushagre Gupta on LinkedIn">LinkedIn</a></figcaption>
+        </figure>
+        <figure class="person" data-reveal="tilt" style="--d:0.28s">
+          <div class="ph"><img src="images/milo-sunglasses.jpg" alt="Milo the golden retriever in pink round sunglasses, sitting in the sun" width="975" height="1300" loading="lazy"></div>
+          <figcaption><span class="name">Milo :)</span><span class="role">The dog behind the inspiration</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- CLOSING + FOOTER / CONTACT -->
@@ -687,7 +728,7 @@
   <section class="closing" aria-label="Get in touch">
     <div class="wrap">
       <div class="txt" data-reveal="lift">
-        <h2>Going somewhere soon? Say woof.</h2>
+        <h2>Going somewhere soon? Say whoof.</h2>
         <p>Tell us about your pet and your dates, and we’ll take it from there. Or join us as a sitter.</p>
         <div class="ctas">
           <a class="btn btn-teal" href="https://wa.me/919718449155" target="_blank" rel="noopener">
@@ -719,10 +760,10 @@
           <ul>
             <li><a href="#vision">Why Whoof</a></li>
             <li><a href="#how">How it works</a></li>
-            <li><a href="#about">About us</a></li>
-            <li><a href="#faq">FAQ</a></li>
             <li><a href="#get-started" data-open="find">Find a sitter</a></li>
             <li><a href="https://forms.gle/hJ2EU6k7Pyuc1fk78" target="_blank" rel="noopener">Become a sitter</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#about">About us</a></li>
           </ul>
         </div>
       </div>
@@ -796,13 +837,6 @@
   h1.setAttribute("aria-label", h1.textContent);
   h1.innerHTML = h1.textContent.split(" ").map((w, i) => `<span class="w" aria-hidden="true" style="--i:${i}">${w}</span>`).join(" ");
 
-  // ── Quote: wrap words so they can fill in as you scroll ──
-  const quoteP = document.querySelector(".quote > p:first-child");
-  const quoteCard = document.querySelector(".quote");
-  quoteP.setAttribute("aria-label", quoteP.textContent);
-  quoteP.innerHTML = quoteP.textContent.split(" ").map((w) => `<span class="qw" aria-hidden="true">${w}</span>`).join(" ");
-  const quoteWords = [...quoteP.querySelectorAll(".qw")];
-
   // ── Scroll-linked motion: one rAF-throttled loop for everything ──
   const nav = document.querySelector(".nav");
   const heroImg = document.querySelector(".hero-img img");
@@ -820,7 +854,7 @@
     if (y > vh * 0.6 && y > lastY + 6) nav.classList.add("tucked");
     else if (y < lastY - 6 || y < vh * 0.6) nav.classList.remove("tucked");
     lastY = y;
-    if (reduceMotion.matches) { quoteWords.forEach((w) => w.classList.add("on")); return; }
+    if (reduceMotion.matches) return;
     // Hero: photo drifts slower than the page; headline lifts and fades as you leave
     if (y < vh * 1.2) {
       if (wide.matches) {
@@ -839,13 +873,6 @@
       const off = (r.top + r.height / 2 - vh / 2) * parseFloat(el.dataset.speed);
       el.style.translate = `0 ${off.toFixed(1)}px`;
     });
-    // Quote: words light up as the card travels up the screen
-    const qr = quoteCard.getBoundingClientRect();
-    if (qr.top < vh && qr.bottom > 0) {
-      const prog = clamp01((vh * 0.9 - qr.top) / (vh * 0.55));
-      const n = Math.round(prog * quoteWords.length);
-      quoteWords.forEach((w, i) => w.classList.toggle("on", i < n));
-    }
   }
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   addEventListener("resize", onScroll);
